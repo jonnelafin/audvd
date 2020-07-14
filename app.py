@@ -94,6 +94,12 @@ if __name__ == "__main__":
         if not skip:
             ui_verify(inp, outp)
         files = getFiles(inp)
+        allc = len(files)
+        i = 0
         for fi in files:
-            o = outp + os.path.basename(fi)
-            print("     " + fi + " --> " + o)
+            i = i + 1
+            fi2 = inp + "/" + fi
+            o = outp + "/" + os.path.basename(fi) + ".mp4"
+            print("     " + fi2 + " --> " + o)
+            convert(fi2, o)
+            print(str(i) + " / " + str(allc) + " done!")
