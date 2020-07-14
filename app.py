@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-v = 0.1
+v = 1.0
 
 print("audvd v. " + str(v))
 print("audvd written by (and originally for) Elias Eskelinen aka Jonnelafin.")
 
 print("audvd importing from libraries...")
+import os
 print("     moviepy...",end="")
 from moviepy.editor import *
 print("DONE")
@@ -12,6 +13,13 @@ print("     soundfile...",end="")
 import soundfile as sf
 print("DONE")
 
+def getFiles(inp):
+    import os
+    filelist=os.listdir(inp)
+    for fichier in filelist[:]: # filelist[:] makes a copy of filelist.
+        if not(fichier.endswith(".wav")):
+            filelist.remove(fichier)
+    return(filelist)
 def getLen(file):
     import math
     f = sf.SoundFile(file)
@@ -85,3 +93,7 @@ if __name__ == "__main__":
             skip = bool(sys.argv[3])
         if not skip:
             ui_verify(inp, outp)
+        files = getFiles(inp)
+        for fi in files:
+            o = outp + os.path.basename(fi)
+            print("     " + fi + " --> " + o)
